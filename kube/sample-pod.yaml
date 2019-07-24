@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod
+  labels:
+    # リソース分別のためのKey-Value
+    # どんな名前でも良いが、衝突に注意
+    la: test
+  annotations:
+    # ただのKey-Value(正式運用前の設定に使うなど用途は色々)
+    annotation1: hello
+    anno2: test
+spec:
+  # こうも書ける
+  # containers: [{name: nginx-container, image: nginx:1.13}]
+  containers:
+    - name: nginx-container1
+      image: nginx:1.12

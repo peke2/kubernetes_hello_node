@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sample-job
+spec:
+  completions: 1
+  parallelism: 1
+  backoffLimit: 10
+  template:
+    spec:
+      containers:
+      - name: sleep-container
+        image: centos:7
+        # pid 1 で起動するため、「kill -9 1」で落とせない
+        # command: ["sleep"]
+        # args: ["600"]
+        command: ["sh", "-c"]
+        args: ["$(sleep 3600)"]
+      restartPolicy: Never

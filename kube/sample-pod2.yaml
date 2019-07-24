@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod-php
+  labels:
+    # リソース分別のためのKey-Value
+    # どんな名前でも良いが、衝突に注意
+    la: test
+  annotations:
+    # ただのKey-Value(正式運用前の設定に使うなど用途は色々)
+    annotation1: hello
+    anno2: test
+spec:
+  containers:
+    - name: php-container
+      image: php:7.3.5-cli

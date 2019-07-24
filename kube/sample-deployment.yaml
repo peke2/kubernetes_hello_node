@@ -1,0 +1,22 @@
+# 管理の関連は以下
+# Deployment -> Replicaset -> Pod
+# ロールバックやローリングアップデートなども管理してくれるため Replicaset よりも利便性は高い？
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.17
+          ports:
+            - containerPort: 80

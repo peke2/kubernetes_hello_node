@@ -1,0 +1,14 @@
+# ReplicaSetで上限を超えたPodが削除される動作を確認するため、同じラベルを指定したダミー
+# sample-replicas.yaml で作成した状態でこれを作成するとポッドが増えないことが確認できる
+# Podの削除・作成のログは以下で確認可能
+# kubectl describe rs
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-rsdummy
+  labels:
+    app: sample-app
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.12 
