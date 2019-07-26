@@ -1,0 +1,30 @@
+# 管理の関連は以下
+# Deployment -> Replicaset -> Pod
+# ロールバックやローリングアップデートなども管理してくれるため Replicaset よりも利便性は高い？
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespcae: hello
+  name: hello-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-node
+  template:
+    metadata:
+      labels:
+        app: hello-node
+    spec:
+      containers:
+        - name: node-container
+          image: localhost:5000/peke2/hello_node_server
+          ports:
+            - containerPort: 3000
+          env:
+          - name: MYSQL_USER
+            value: 'root'
+          - name: MYSQL_ROOT_PASSWORD
+            value: 'pass'
+          - name: MYSQL_PASSWORD
+            value: 'pass'
