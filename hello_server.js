@@ -8,9 +8,12 @@ var callCount = 0;
 
 const server = http.createServer((req, res)=>{
     const connection = mysql.createConnection({
-        host : 'database',
-        user : 'root',
-        password : 'root',
+        // host : 'database',
+        // user : 'root',
+        // password : 'root',
+        host : 'hello-mysql',
+        user : process.env.MYSQL_USER,
+        password : process.env.MYSQL_ROOT_PASSWORD,
         database : 'hello'
     });
     // connection.connect();
