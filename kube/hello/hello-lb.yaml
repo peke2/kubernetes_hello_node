@@ -1,37 +1,32 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: hello-lb
-#   namespace: hello
-# spec:
-#   type: LoadBalancer
-#   ports:
-#     - name: "http-port"
-#       protocol: "TCP"
-#       port: 3001
-#       targetPort: 3000
-#       #nodePort: 30082
-#   selector:
-#     app: hello-node
-# status:
-#   loadBalancer:
-#     ingress:
-#       - ip: 127.0.0.1
-
-# apiVersion: networking.k8s.io/v1beta1
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
+  name: hello-lb
   namespace: hello
-  name: hello-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: hello-node
-          servicePort: 3000
+  type: LoadBalancer
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 3001
+      targetPort: 3000
+      #nodePort: 30082
+  selector:
+    app: hello-node
+
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   namespace: hello
+#   name: hello-ingress
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: hello-node
+#           servicePort: 3000
 

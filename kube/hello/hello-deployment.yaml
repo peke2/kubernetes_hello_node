@@ -25,6 +25,6 @@ spec:
           - name: MYSQL_USER
             value: 'root'
           - name: MYSQL_ROOT_PASSWORD
-            value: 'pass'
+            value: 'root'
           - name: MYSQL_PASSWORD
             value: 'pass'
