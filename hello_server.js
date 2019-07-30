@@ -25,24 +25,12 @@ const server = http.createServer((req, res)=>{
     connection.query('SELECT * FROM hello WHERE id=1;', function(err, rows, fields){
         if(err){console.log('error: '+err);}
         count = rows[0].count;
-    
-    //     // console.log('count=['+count+']');
-    //     // for(var r of rows){
-    //     //     console.log(r);
-    //     // }
-    //     // console.log('--------');
-    //     // for(var f of fields){
-    //     //     console.log(f);
-    //     // }
-    //     // console.log('--------');
     });
 
     connection.query('UPDATE hello SET count=count+1 WHERE id=1;', function(err, result){
         //  状態が整った段階でレスポンスを返す
         res.statusCode = 200;
-        res.setHeader({
-            'Content-type': 'text/plain; charset=utf-8',
-        });
+        res.setHeader('Content-type', 'text/plain; charset=utf-8');
         var message = 'Hello Node.js\ncount=['+count+'->'+(count+1)+']\n(hash:'+commit_hash+')\n';
         message += '更新確認\n';
         res.end(message);    //  キューで順番に処理されるなら、直前のクエリで取得した値が有効なはず
