@@ -40,8 +40,12 @@ const server = http.createServer((req, res)=>{
     connection.query('UPDATE hello SET count=count+1 WHERE id=1;', function(err, result){
         //  状態が整った段階でレスポンスを返す
         res.statusCode = 200;
-        res.setHeader('Content-type', 'text/plain');
-        res.end('Hello Node.js\ncount=['+count+'->'+(count+1)+']\n(hash:'+commit_hash+')');    //  キューで順番に処理されるなら、直前のクエリで取得した値が有効なはず
+        res.setHeader({
+            'Content-type': 'text/plain; charset=utf-8',
+        });
+        var message = 'Hello Node.js\ncount=['+count+'->'+(count+1)+']\n(hash:'+commit_hash+')\n';
+        message += '更新確認\n';
+        res.end(message);    //  キューで順番に処理されるなら、直前のクエリで取得した値が有効なはず
     });
 
     connection.end();
