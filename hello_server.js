@@ -7,7 +7,7 @@ const port = 3000;
 
 var callCount = 0;
 
-var commit_hash = fs.readFileSync('container_hash.txt', 'utf8');
+var commit_hash = fs.readFileSync('container_hash.txt', 'utf8').trim();
 
 const server = http.createServer((req, res)=>{
     const connection = mysql.createConnection({
