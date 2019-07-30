@@ -1,10 +1,13 @@
 const http = require('http');
 const mysql = require('mysql');
+const fs = require('fs');
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
 var callCount = 0;
+
+var commit_hash = fs.readFileSync('container_hash.txt', 'utf8');
 
 const server = http.createServer((req, res)=>{
     const connection = mysql.createConnection({
@@ -38,7 +41,7 @@ const server = http.createServer((req, res)=>{
         //  状態が整った段階でレスポンスを返す
         res.statusCode = 200;
         res.setHeader('Content-type', 'text/plain');
-        res.end('Hello Node.js\ncount=['+count+']');    //  キューで順番に処理されるなら、直前のクエリで取得した値が有効なはず
+        res.end('Hello Node.js\ncount=['+count+'->'+(count+1)+']\n(hash:'+commit_hash+')');    //  キューで順番に処理されるなら、直前のクエリで取得した値が有効なはず
     });
 
     connection.end();
