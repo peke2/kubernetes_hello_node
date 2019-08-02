@@ -1,6 +1,20 @@
 # 管理の関連は以下
 # Deployment -> Replicaset -> Pod
 # ロールバックやローリングアップデートなども管理してくれるため Replicaset よりも利便性は高い？
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: hello
+  name: hello-node-service
+spec:
+  selector:
+    app: hello-node
+  type: ClusterIP
+  ports:
+  - port: 3000
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
