@@ -14,6 +14,20 @@
 #   selector:
 #     app: hello-node
 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hello-cert  # ここの名前はコマンドで作成した証明書の名前 -> kubectl create secret tls hello-cert --key MyKey.key --cert MyCertificate.crt
+  namespace: default
+data:
+  # tls.crt: base64 encoded cert
+  # tls.key: base64 encoded key
+  tls.crt: "MIIDIzCCAgugAwIBAgIJAOe8r50imh5uMA0GCSqGSIb3DQEBCwUAMCgxEjAQBgNVBAMMCWxvY2FsaG9zdDESMBAGA1UECgwJbG9jYWxob3N0MB4XDTE5MDgwNTA2MDY0NloXDTIwMDgwNDA2MDY0NlowKDESMBAGA1UEAwwJbG9jYWxob3N0MRIwEAYDVQQKDAlsb2NhbGhvc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDqRdhR7qVuIjEwy+J31RB/8WNwReoTyoYEDkoTUul8eX0Z0yy87WcPL6SAOn/79U5r+ZDCLu62oLRX65FMW1PsYSDFJo4fFZBhe04cpfYpxno/OS5jZauU3c5K6b5ZbMTE8lYjgqqZc4c4X4vz24Me578iniVelz+93E1HI0XRbFs63jpFpWKF6scSjYUo4UHeyrdUswg3tAVkYnayS7vGRfZuSPIZaLDcZWqy+NPQKXjczRDoMeICVA2FGCir+Oni+r7WojIkbVEuweJb65ALVmLNdFuElfoavPL5SMCRADCNfflMEMseggPdsouI48wqgHMQ2y+p+9+cYv/acJr3AgMBAAGjUDBOMB0GA1UdDgQWBBRVehyJVD23mS1JWt69O4tTnuqOHzAfBgNVHSMEGDAWgBRVehyJVD23mS1JWt69O4tTnuqOHzAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQDhq/NBwtYjGdSOIjNr9jhPFc2PuehWE0IYGXhy/icVosOoeuWlcf3ma/eZe/r2NRNXdrRjJ9M7WIWCPm7Z2qPyvgQn02/coQhAUych3TDTkxMobKFEfN/5vfafpvFApCnciH791SvLLCQ0nnwhpuZ8GgtrOjMjSpfRulGplajx1dA6w/96zT8GQ0KHODxkZdTqfKsYwUIVWOXm/3yqy66yWTNcVCcEcS5nNp0t6qd004cek5b4TkkUeen7s00ZEMHRirqk5Fo/WjjA7VwX5wM/0u8tyOEg+DhWcVKNshXcWmBKHkq6OaHgYo8RszH/Gi7an9/rr36LS6sh1d3nJbte"
+  tls.key: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDqRdhR7qVuIjEwy+J31RB/8WNwReoTyoYEDkoTUul8eX0Z0yy87WcPL6SAOn/79U5r+ZDCLu62oLRX65FMW1PsYSDFJo4fFZBhe04cpfYpxno/OS5jZauU3c5K6b5ZbMTE8lYjgqqZc4c4X4vz24Me578iniVelz+93E1HI0XRbFs63jpFpWKF6scSjYUo4UHeyrdUswg3tAVkYnayS7vGRfZuSPIZaLDcZWqy+NPQKXjczRDoMeICVA2FGCir+Oni+r7WojIkbVEuweJb65ALVmLNdFuElfoavPL5SMCRADCNfflMEMseggPdsouI48wqgHMQ2y+p+9+cYv/acJr3AgMBAAECggEAcjillKTnUYAoPaNagpSGW+sEUYw06XtXxgh1g2BsaH0PSpUUffS9x8Cx0rczCVR77NccBiE90BsgcrFvASySCXD9ukHnDy7DW1P0LLGaCJo1pjep71p1wro2R34ZiZ4nfeKtrtiZdwHFzu1+3eGL13ikTyuOCsVxlY8gumtvMgBUwdpJWguaN5+1/3mNHrNvsq0IUQoTfIZjLxlXOqhq80BF/GU0jcuMSC2BNCIK7ppkMvzXqFxRdGlLL7DZasXXwZ5PXhonEbL47DviaJy7dOVk8JoBSOI/2xQ5jlxdC9RT+NpuDIo8gDpZspR5tOz9nIuB+J2SXwAV4YtX7EFpQQKBgQD7rolITF/T/9jj1hpsuLUVUs8BAFmjcKRdfVmquplUBUMTUItGiz5cz0dMAnmAq8Zy93CajGPvknAfguDPjayOWx5TRqKNEHPSpqAjHZqGzAg0NoMYo+Aph6l8KS1iAhQlF1bbaMxGkEfmxFSxyol33Dxnifd5tTT/hBQlPjal1wKBgQDuStfhQCDN/bnnyxg+ydoQ9BD3rk9oI0DqH7SVGl3cOUIS9xEKfqlpDWI9qnRbLDpNAV63a6jzPYviNRtOWoM74WqAPt4GrbZJXTC3RIpiQMPForAolYP3tZkcf+TMRyRBxZghq2hGI+NUr28CbJI3EQXcj5oZSA42jYrbvDDP4QKBgQCJn/Zn94OLTONQKxrGCvbSkzao6IUbz5PBn7LxnhoMDNiR7kBKsgfG/n2RPeUtDEF3SoFjsZNQRPZU9N9z/5e1PHRHu19V3gJH1V/J8/006sstqgVj6vDAJPPz9hxf9J0Jb0rKrfLOP0ViFkft9L/ZMDBDufj+r60scBAIEY4WfwKBgQDCarHjh4y8RAzPfzZS1CFkv5ywV7lVv52Q5zlQhWia6uRr0MRIibryiQbkRRQV5unSNhHvGJmJi2d7sdSLgvGbg3h/FcvUKxqUlMHQZM17CFgyAWA0XHiFO9amF/q2aDy+pNZQcibrQxCQ4Wly0t4gq3Ta1RbnFZDzFVx7lvlEQQKBgDzd9KiWOK4PUT05x19Bs/gsrhaQ/Y2KhFNnQ1jw0hdeKy68Zog2o97KwFFyE9+P+3CBkGuO2d1zzDSr4sb6s8ThVEllvHQ9Swm+4PuUHMPzc9HQTJ1ro/0VI3xF+ntVy6jftzqnoIJjgdFMafLpsqPzPim4UR5DmwazYtjqqYlU"
+type: kubernetes.io/tls
+
+---
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -21,10 +35,21 @@ metadata:
   name: hello-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  tls:
+  - hosts:
+    - localhost
+    secretName: dummy-hello-cert
   rules:
   - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello-node-service
+          servicePort: 3000
+  - host: localhost
+    http:
       paths:
       - path: /
         backend:
