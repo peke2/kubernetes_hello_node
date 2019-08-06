@@ -39,16 +39,17 @@ metadata:
 spec:
   tls:
   - hosts:
-    - localhost
+    - hello.domain
     secretName: dummy-hello-cert
   rules:
-  - http:
+  - host: localhost
+    http:
       paths:
       - path: /
         backend:
           serviceName: hello-node-service
           servicePort: 3000
-  - host: localhost
+  - host: hello.domain
     http:
       paths:
       - path: /
