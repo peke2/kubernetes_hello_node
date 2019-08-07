@@ -35,12 +35,12 @@ metadata:
   name: hello-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   tls:
   - hosts:
-    - hello.domain
-    secretName: dummy-hello-cert
+    - hello.com
+    secretName: hello-cert
   rules:
   - host: localhost
     http:
@@ -49,7 +49,7 @@ spec:
         backend:
           serviceName: hello-node-service
           servicePort: 3000
-  - host: hello.domain
+  - host: hello.com
     http:
       paths:
       - path: /
